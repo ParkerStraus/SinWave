@@ -28,14 +28,27 @@ namespace SinWave
                 {
                     newline = " " + newline;
                 }
-                Console.Write("\r{0}%"+newline+"                          ", i);
+
+
+                if(i == 17)
+                {
+                    for(int k = 0; k < Lines.Length-1; k++)
+                    {
+                        string frontline = Lines[k+1];
+                        Lines[k] = frontline;
+                    }
+                }
                 Lines[i] = newline;
+
+                foreach (string Line in Lines)
+                {
+
+                    Console.Write("\r{0}%" + newline + "                          ", i);
+                }
+
                 System.Threading.Thread.Sleep(100);
                 SinPoint += Inc;
-                i++;
-                if (i > Lines.Length-1) {
-                    i = 0;
-                }
+                if(i <17) i++;
             }
             Console.ReadKey();
         }
