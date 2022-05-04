@@ -12,17 +12,23 @@ namespace SinWave
     {
         static void Main(string[] args)
         {
+            Console.CursorVisible = false;
+            int PaddingX = 15;
+            int PaddingY = 5;
             double SinPoint = 0;
             string[] Lines = new string[18];
-            float Inc = 0.40f;
-            Console.SetWindowSize(45, 21);
-            Console.Out.WriteLine("Traksjfhjkahsdfjkasjkhdfjk");
+            float Inc = 0.20f;
+            Console.SetWindowSize(45+(PaddingX*2), 21+(PaddingY*2));
+            Console.SetCursorPosition(PaddingX, PaddingY);
+            Console.Out.Write("{  [Sine Waves] Created By Parker Straus   }");
+            Console.SetCursorPosition(PaddingX, PaddingY+1);
+            Console.Out.Write("--------------------------------------------");
             int i = 0;
             while (true)
             {
                 double SinValue = Math.Sin(SinPoint);
                 string newline = "sin(" + String.Format("{0:0.00}", SinPoint) + ")= " + String.Format("{0:0.00}", SinValue);
-                int SpaceAmount = 10;
+                int SpaceAmount = 13;
                 SpaceAmount += Convert.ToInt32(Math.Truncate(SinValue * 10));
                 for(int j = SpaceAmount; j >= 0; j--)
                 {
@@ -40,13 +46,16 @@ namespace SinWave
                 }
                 Lines[i] = newline;
 
+                int pos = 0;
+
                 foreach (string Line in Lines)
                 {
-
-                    Console.Write("\r{0}%" + newline + "                          ", i);
+                    Console.SetCursorPosition(0+PaddingX, pos+2+PaddingY);
+                    Console.Write(Line + "                          "+"\r");
+                    pos++;
                 }
 
-                System.Threading.Thread.Sleep(100);
+                System.Threading.Thread.Sleep(50);
                 SinPoint += Inc;
                 if(i <17) i++;
             }
